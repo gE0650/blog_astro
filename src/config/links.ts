@@ -26,6 +26,13 @@ export const linkApplyOwner = {
 } satisfies LinkApplyOwner;
 
 export const friendLinks = [
+  {
+    name: "BillFeng",
+    description: "在星夜尽头，遇见另一盏灯",
+    href: "https://bfyes.github.io/",
+    avatarSrc: "https://avatars.githubusercontent.com/u/233542744?v=4",
+  },
+
 ] satisfies readonly FriendLinkItem[];
 
 export const lostLinks = [
