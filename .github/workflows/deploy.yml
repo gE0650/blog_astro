@@ -65,6 +65,7 @@ jobs:
       - name: Write runtime env
         run: |
           {
+            echo "HOST=0.0.0.0"
             echo "PORT=${{ env.APP_PORT }}"
             echo "WALINE_SERVER_URL=${{ secrets.WALINE_SERVER_URL || vars.WALINE_SERVER_URL }}"
             echo "PUBLIC_WALINE_SERVER_URL=${{ secrets.PUBLIC_WALINE_SERVER_URL || vars.PUBLIC_WALINE_SERVER_URL }}"
@@ -77,7 +78,7 @@ jobs:
         run: |
           ssh -i ~/.ssh/deploy_key -p ${{ env.SSH_PORT }} \
             ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} \
-            "export PM2_APP_NAME=${{ env.PM2_APP_NAME }}; export PORT=${{ env.APP_PORT }}; source ~/.nvm/nvm.sh 2>/dev/null || true; corepack enable; cd ${{ env.DEPLOY_PATH }} && pnpm install --prod --frozen-lockfile && (pm2 delete ${{ env.PM2_APP_NAME }} 2>/dev/null || true) && pm2 start ecosystem.config.cjs && pm2 save"
+            "export PM2_APP_NAME=${{ env.PM2_APP_NAME }}; export HOST=0.0.0.0; export PORT=${{ env.APP_PORT }}; source ~/.nvm/nvm.sh 2>/dev/null || true; corepack enable; cd ${{ env.DEPLOY_PATH }} && pnpm install --prod --frozen-lockfile && (pm2 delete ${{ env.PM2_APP_NAME }} 2>/dev/null || true) && pm2 start ecosystem.config.cjs && pm2 save"
 
       - name: Cleanup SSH key
         if: always()

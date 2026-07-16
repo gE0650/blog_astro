@@ -23,6 +23,7 @@ module.exports = {
       name: process.env.PM2_APP_NAME || "Blog",
       script: serverEntry,
       env: {
+        HOST: process.env.HOST || env.HOST || "0.0.0.0",
         PORT: process.env.PORT || env.PORT || 4321,
         ...env,
       },
