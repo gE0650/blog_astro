@@ -3,7 +3,7 @@ name: Deploy Astro Site
 on:
   push:
     branches:
-      - main
+      - gE
   workflow_dispatch:
 
 env:
